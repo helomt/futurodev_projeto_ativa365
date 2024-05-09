@@ -1,5 +1,10 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
+import { ButtonFormBlack } from "../../components/buttonFormBlack/buttonFormBlack";
+import { ButtonForm } from "../../components/buttonForm/buttonForm";
+
+
 import styles from "./style.module.css";
+
 
 export function Login() {
   return (
@@ -24,30 +29,9 @@ export function Login() {
             variant="outlined"
             color="error"
           />
-
-          <Button
-            variant="contained"
-            sx={{
-              width: 400,
-              height: 50,
-              bgcolor: "#FF0A1B",
-              "&:hover": { backgroundColor: "#F35359" },
-            }}
-          >
-            Entrar
-          </Button>
+          <ButtonForm>Entrar</ButtonForm>
         </form>
-        <Button
-          variant="contained"
-          sx={{
-            width: 400,
-            height: 50,
-            bgcolor: "#0F0F0F",
-            "&:hover": { backgroundColor: "#70675C" },
-          }}
-        >
-          Cadastre-se
-        </Button>
+        <ButtonFormBlack>Cadastre-se</ButtonFormBlack>
       </div>
     </div>
   );
