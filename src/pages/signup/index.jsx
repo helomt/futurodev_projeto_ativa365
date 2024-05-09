@@ -1,31 +1,34 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import styles from "./style.module.css";
+import { InputForm } from "../../components/inputForm/inputForm";
+import { ButtonForm } from "../../components/buttonForm/buttonForm";
+
 
 export function SignUp() {
   return (
     <div className={styles.container}>
-      <Typography>Cadastre-se</Typography>
+      <Typography fontSize={35} fontWeight={500} color={"#FF0A1B"}>Cadastre-se</Typography>
       <form className={styles.form}>
         <div className={styles.row}>
-          <TextField fullWidth label="Nome"></TextField>
-          <TextField fullWidth label="Data de Nascimento"></TextField>
+          <InputForm labelText={'Nome'} required={true}/>
+          <InputForm labelText={'Data de Nascimento'} required={true}/>
         </div>
         <div className={styles.row}>
-          <TextField fullWidth label="CPF"></TextField>
-          <TextField fullWidth label="Email"></TextField>
+        <InputForm labelText={'CPF'} required={true}/>
+        <InputForm labelText={'Email'} required={true}/>
         </div>
         <div className={styles.row}>
-          <TextField fullWidth label="Senha"></TextField>
-          <TextField fullWidth label="CEP"></TextField>
+        <InputForm labelText={'Senha'} required={true}/>
+        <InputForm labelText={'CEP'} required={true}/>
         </div>
         <div className={styles.row}>
-          <TextField fullWidth label="Endereço"></TextField>
-          <TextField fullWidth label="Número"></TextField>
+        <InputForm labelText={'Endereço'} required={false}/>
+        <InputForm labelText={'Número'} required={true}/>
         </div>
         <div>
-          <TextField sx={{width:430}} label="Complemento"></TextField>
+          <TextField sx={{width:505}} label="Complemento" color="error"/>
         </div>
-        <Button>Cadastrar</Button>
+        <ButtonForm>Cadastrar</ButtonForm>
       </form>
       <Typography>Já possui conta? Faça seu login.</Typography>
     </div>
