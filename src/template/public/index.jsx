@@ -1,6 +1,9 @@
 import styles from "./style.module.css";
-import { Login } from "../../pages/login";
+
+
+// import { Login } from "../../pages/login";
 import { Typography } from "@mui/material";
+import { SignUp } from "../../pages/signup";
 
 export function PublicTemplate() {
   return (
@@ -16,7 +19,7 @@ export function PublicTemplate() {
         </Typography>
       </header>
       <main className={styles.mainContainer}>
-        <Login></Login>
+      <SignUp></SignUp>
       </main>
     </>
   );
