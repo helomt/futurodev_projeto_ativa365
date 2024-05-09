@@ -1,7 +1,8 @@
-import{Login} from './pages/login'
+// import{Login} from './pages/login'
+import { PublicTemplate } from './template/public';
 
 function App() {
-  return <><Login></Login></>;
+  return <><PublicTemplate></PublicTemplate></>;
 }
 
 export default App;
