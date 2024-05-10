@@ -9,7 +9,7 @@ export function Dashboard() {
     <div className={styles.mainContainer}>
       <div className={styles.cardContainerLine}>
         <div className={styles.containerText}>
-          <Typography fontSize={32} fontWeight={500} fontStyle={"oblique"}>
+          <Typography fontSize={40} fontWeight={500} fontStyle={"oblique"}>
             Dashboard
           </Typography>
           <Typography fontSize={20}>Total cadastrado:</Typography>
