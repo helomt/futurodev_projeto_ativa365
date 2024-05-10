@@ -11,7 +11,7 @@ export function ButtonFormBlack({ children, ...rest }) {
             width: 400,
             height: 50,
             bgcolor: "#0F0F0F",
-            "&:hover": { backgroundColor: "#70675C" },
+            "&:hover": { backgroundColor: "#A29686", color: "#0F0F0F" },
           }}
       >
         {children}
