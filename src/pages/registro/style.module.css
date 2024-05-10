@@ -1,0 +1,15 @@
+
+.form {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+
+}
+
+.row {
+  display: flex;
+  gap: 5px;
+}
