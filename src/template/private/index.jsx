@@ -252,7 +252,7 @@ export function PrivateTemplate() {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, height: "100vh", overflow: "auto" }}
+        sx={{ flexGrow: 1, p: 3, height: "100vh", overflow: "auto", padding: 2 }}
       >
         <DrawerHeader />
         <Dashboard></Dashboard>
