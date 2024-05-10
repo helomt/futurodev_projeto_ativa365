@@ -6,18 +6,24 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 import styles from "./style.module.css";
+import {
+  CircleChevronLeft,
+  CircleChevronRight,
+  Home,
+  LogOut,
+  MapPin,
+  Users,
+} from "lucide-react";
+import { Avatar } from "@mui/material";
 
 const drawerWidth = 250;
 
@@ -117,24 +123,36 @@ export function PrivateTemplate() {
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon className={styles.icon} />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Titulo
-          </Typography>
+
+          {/* <div className={styles.toolbarTitle}>
+            <Typography variant="h6" noWrap component="div" >
+              possivel implementação de acordo com o nome da página
+            </Typography>
+          </div> */}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <Typography>aqui</Typography>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
+        <div>
+          <DrawerHeader className={styles.drawerHeader}>
+            <Avatar
+              sx={{ width: 100, height: 70 }}
+              variant="square"
+              alt="Logo do App escrito Ativa 365"
+              src="/logo-bwr.png"
+            />
+
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <CircleChevronRight className={styles.icon} />
+              ) : (
+                <CircleChevronLeft className={styles.icon} />
+              )}
+            </IconButton>
+          </DrawerHeader>
+        </div>
+
         <Divider />
         <List>
           <ListItem>
@@ -152,13 +170,83 @@ export function PrivateTemplate() {
                   justifyContent: "center",
                 }}
               >
-                <MenuIcon />
+                <Home className={styles.icon} />
               </ListItemIcon>
-              <ListItemText primary={"item"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Dashboard"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <MapPin className={styles.icon} />
+              </ListItemIcon>
+              <ListItemText primary={"Locais"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <Users className={styles.icon} />
+              </ListItemIcon>
+              <ListItemText
+                primary={"Usuários"}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
+        <Box className={styles.spaceBox}></Box>
+        <List className={styles.downList}>
+          <ListItem>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                {" "}
+                <LogOut className={styles.icon} />
+              </ListItemIcon>
+              <ListItemText primary={"Sair"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+        </List>
       </Drawer>
 
       <Box
@@ -166,7 +254,6 @@ export function PrivateTemplate() {
         sx={{ flexGrow: 1, p: 3, height: "100vh", overflow: "auto" }}
       >
         <DrawerHeader />
-        <Typography>Escreveo</Typography>
       </Box>
     </Box>
   );
