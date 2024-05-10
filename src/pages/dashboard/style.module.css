@@ -1,39 +1,47 @@
 .mainContainer {
-  background-color: brown;
-
   height: 85vh;
 }
 
 .cardContainerLine {
-  background-color: aqua;
   display: flex;
   gap: 25px;
 }
 
 .cardContainer {
   padding: 10px;
-
 }
 
+.containerText{
+    display: flex;
+    flex-direction: row;
+    gap: 40%;
+}
 
 .cardContentContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 80px;
-  width: 180px;
+  width: 150px;
   align-items: center;
 }
 
+.listContainerText {
+  margin-top: 2em;
+}
 .listContainer {
-  background-color: blue;
+  margin-top: 1em;
 }
 
 .icon {
-    height: 100px;
-    color:#FF0A1B;
+  height: 100px;
+  color: #ff0a1b;
 }
 
-.number{
-    color:#FF0A1B;
+.number {
+  color: #ff0a1b;
+}
+
+.containerText {
+  width: 50%;
 }
