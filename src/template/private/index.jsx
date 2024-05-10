@@ -25,7 +25,7 @@ import {
 import { Avatar } from "@mui/material";
 
 import styles from "./style.module.css";
-import { Registro } from "../../pages/registro";
+import { Locais } from "../../pages/locais";
 
 const drawerWidth = 250;
 
@@ -256,7 +256,7 @@ export function PrivateTemplate() {
         sx={{ flexGrow: 1, p: 3, height: "100vh", overflow: "auto", padding: 2 }}
       >
         <DrawerHeader />
-        <Registro></Registro>
+        <Locais></Locais>
       </Box>
     </Box>
   );
