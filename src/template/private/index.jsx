@@ -24,6 +24,7 @@ import {
   Users,
 } from "lucide-react";
 import { Avatar } from "@mui/material";
+import { Dashboard } from "../../pages/dashboard";
 
 const drawerWidth = 250;
 
@@ -254,6 +255,7 @@ export function PrivateTemplate() {
         sx={{ flexGrow: 1, p: 3, height: "100vh", overflow: "auto" }}
       >
         <DrawerHeader />
+        <Dashboard></Dashboard>
       </Box>
     </Box>
   );
