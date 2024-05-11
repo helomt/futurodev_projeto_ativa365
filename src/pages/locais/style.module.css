@@ -1,0 +1,14 @@
+.mainContainer{
+
+    height: 85vh;
+}
+
+.containerHeader{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.table{
+    margin-top: 16px;
+}
