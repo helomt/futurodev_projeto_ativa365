@@ -1,0 +1,41 @@
+.itemFunctions {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  width: 100%;
+  
+}
+
+.listHeaderCell {
+  width: 100rem;
+  text-align: center;
+
+}
+
+.listHeaderCellOptions {
+  width: 80rem;
+  text-align: right;
+  margin-right: 2rem;
+}
+
+.itemText {
+  /* width: 80rem; */
+  width: 20px;
+  text-align: center;
+  background-color: aqua;
+}
+
+.itemTextLine {
+  width: 75vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.list{
+    border: 1px solid #ccc;
+}
