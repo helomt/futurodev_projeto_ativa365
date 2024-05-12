@@ -94,7 +94,7 @@ export default function ListDash() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[2, 5]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
