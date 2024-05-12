@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import styles from "./style.module.css";
-import ListPlaces from "../../components/listPlaces";
+import { ListPlaces } from "../../components/listPlaces";
 
 
 
