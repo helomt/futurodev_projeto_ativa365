@@ -1,11 +1,9 @@
 import styles from "./style.module.css";
+import PropTypes from "prop-types";
 
-
-// import { Login } from "../../pages/login";
 import { Typography } from "@mui/material";
-import { SignUp } from "../../pages/signup";
 
-export function PublicTemplate() {
+export function PublicTemplate({ children }) {
   return (
     <>
       <header className={styles.header}>
@@ -18,9 +16,11 @@ export function PublicTemplate() {
           Comece agora a sua jornada
         </Typography>
       </header>
-      <main className={styles.mainContainer}>
-      <SignUp></SignUp>
-      </main>
+      <main className={styles.mainContainer}>{children}</main>
     </>
   );
 }
+
+PublicTemplate.propTypes = {
+  children: PropTypes.node.isRequired,
+};
