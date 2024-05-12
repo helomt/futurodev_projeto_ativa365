@@ -13,3 +13,7 @@
   display: flex;
   gap: 5px;
 }
+
+span{
+  color: red;
+}
