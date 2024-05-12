@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import styles from "./style.module.css";
 import { ListPlaces } from "../../components/listPlaces";
+import { Link } from "react-router-dom";
 
 
 
@@ -17,6 +18,7 @@ export function Locais() {
           </Typography>
         </div>
         <div>
+          <Link to={'/dashboard/locais/registro'}>
           <Button
             variant="contained"
             sx={{
@@ -28,6 +30,7 @@ export function Locais() {
           >
             Cadastrar
           </Button>
+          </Link>
           
         </div>
       </div>
