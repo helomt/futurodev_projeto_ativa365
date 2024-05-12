@@ -89,7 +89,7 @@ export function Dashboard() {
           </Card>
         </div>
       </div>
-      <div className={styles.listContainerText} >
+      <div >
         <Typography fontSize={32} fontWeight={500} fontStyle={"oblique"}>
           Locais
         </Typography>
