@@ -20,12 +20,11 @@ import {
   Home,
   LogOut,
   MapPin,
-  Users,
 } from "lucide-react";
 import { Avatar } from "@mui/material";
 
 import styles from "./style.module.css";
-import { Locais } from "../../pages/locais";
+import { NavLink, Outlet } from "react-router-dom";
 
 const drawerWidth = 250;
 
@@ -157,72 +156,57 @@ export function PrivateTemplate() {
 
         <Divider />
         <List>
-          <ListItem>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+          <NavLink to={"/dashboard"} end>
+            <ListItem className={styles.navButton}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <Home className={styles.icon} />
-              </ListItemIcon>
-              <ListItemText
-                primary={"Dashboard"}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Home className={styles.navIcon} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Dashboard"}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
+          <NavLink to="/dashboard/locais" end>
+            <ListItem className={styles.navButton}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
               >
-                <MapPin className={styles.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"Locais"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <Users className={styles.icon} />
-              </ListItemIcon>
-              <ListItemText
-                primary={"Usuários"}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <MapPin className={styles.navIcon} />
+                </ListItemIcon>
+
+                <ListItemText
+                  primary={"Locais"}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
         </List>
         <Divider />
         <Box className={styles.spaceBox}></Box>
@@ -253,10 +237,16 @@ export function PrivateTemplate() {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, height: "100vh", overflow: "auto", padding: 2 }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          height: "100vh",
+          overflow: "auto",
+          padding: 2,
+        }}
       >
         <DrawerHeader />
-        <Locais></Locais>
+        <Outlet />
       </Box>
     </Box>
   );
