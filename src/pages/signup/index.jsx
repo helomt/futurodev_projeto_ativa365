@@ -30,6 +30,7 @@ export function SignUp() {
     defaultValues: {
       complemento: "",
       endereco: "",
+      numero:0,
     },
     resolver: zodResolver(schema),
   });
