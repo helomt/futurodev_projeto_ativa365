@@ -5,11 +5,9 @@
   width: 100%;
 }
 
-
-.toolbarTitle{
-
+.toolbarTitle {
   position: relative;
-  left:40%;
+  left: 40%;
 }
 
 .icon {
@@ -26,8 +24,22 @@
   height: 30rem;
 }
 
-.drawerHeader{
+.drawerHeader {
   gap: 6rem;
 }
+.navIcon {
+  color: #f4f6f4;
+}
 
+/* .navIcon :global(.active) {
+  color: #ff0a1b;
+} */
 
+.navButton {
+  color: #f4f6f4;
+}
+
+/* .navButton :global(.active) {
+  color: #ff0a1b;
+  background-color: aqua;
+} */
