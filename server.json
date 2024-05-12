@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Heloisa",
+      "data": "08/12/1988",
+      "cpf": "07204235975",
+      "email": "heloisa@heloisa.com",
+      "senha": "1234",
+      "cep": 88705060,
+      "endereço": "rua jose evaristo fogaça",
+      "numero": 227,
+      "complemento": ""
+    },
+    {
+      "id": 2,
+      "name": "Vitor",
+      "data": "08/12/1988",
+      "cpf": "07204235975",
+      "email": "vitor@heloisa.com",
+      "senha": "1234",
+      "cep": 88705060,
+      "endereço": "rua jose evaristo fogaça",
+      "numero": 227,
+      "complemento": ""
+    }
+  ],
+  "locais": [
+    {
+      "id": 1,
+      "nome": "Academia",
+      "atividade": "corrida",
+      "descricao": "",
+      "cep": 88705060,
+      "endereco": "RUa xxx",
+      "numero": 10,
+      "localidade": "Tubarão",
+      "complemento": "",
+      "usuarioId": 2 
+    }
+  ]
+}
