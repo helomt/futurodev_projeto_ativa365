@@ -1,11 +1,11 @@
 // import{Login} from './pages/login'
-import { PrivateTemplate } from "./template/private";
-// import { PublicTemplate } from "./template/public";
+import { RouterProvider } from "react-router-dom";
+import { routes } from "./routes";
 
 function App() {
   return (
     <>
-      <PrivateTemplate></PrivateTemplate>
+      <RouterProvider router={routes} />
     </>
   );
 }
