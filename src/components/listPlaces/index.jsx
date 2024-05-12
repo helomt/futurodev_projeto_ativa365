@@ -16,7 +16,7 @@ import { Pen, Trash } from "lucide-react";
 
 export function ListPlaces() {
   const [page, setPage] = React.useState(2);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(2);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
