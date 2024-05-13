@@ -6,16 +6,22 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { buscarEndereco } from "../../services/cep";
 
 const schema = z.object({
   nome: z
     .string()
-    .regex(/^(\w\w+)\s(\w+)$/, "Você deve registrar ao menos 2 nomes"),
+    .regex(
+      /^([A-Z][a-z]{3,} )([A-Z][a-z]{3,} )?([A-Z][a-z]{3,})$/,
+      "Você deve registrar ao menos 2 nomes"
+    ),
   data: z.string(),
   cpf: z.string().regex(/[0-9]{11}/, "CPF deve conter 11 números"),
   email: z.string().email("Endereço de email inválido"),
   senha: z.string().min(3, "A senha deve conter no mínimo 3 caracteres"),
-  cep: z.string().regex(/[0-9]{8}/, "O CEP deve conter 8 números"),
+  cep: z
+    .string()
+    .regex(/[0-9]{8}/, "O CEP deve conter 8 números, e somente números"),
   endereco: z.string(),
   numero: z.number().nonnegative("O número não pode ser um valor negativo"),
   complemento: z.string(),
@@ -25,17 +31,27 @@ export function SignUp() {
   const {
     register,
     handleSubmit,
+    getValues,
+    resetField,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
       complemento: "",
-      endereco: "",
-      numero:0,
+      endereco: rua,
+      numero: 0,
     },
     resolver: zodResolver(schema),
   });
+  var rua = "Endereço";
 
-  function onSubmit(values) {
+  async function handleBlur() {
+    const cep = getValues("cep");
+    const enderecoEncontrado = await buscarEndereco(cep);
+    rua = `${enderecoEncontrado.logradouro},${enderecoEncontrado.localidade}`;
+    resetField("endereco", { defaultValue: rua });
+  }
+
+  async function onSubmit(values) {
     console.log(values);
   }
 
@@ -111,25 +127,25 @@ export function SignUp() {
               variant="outlined"
               label={"CEP"}
               required
-              // onBlur={}
               type="text"
               sx={{ width: 250 }}
               helperText={errors.cep && <span>{errors.cep.message}</span>}
-              {...register("cep")}
+              {...register("cep", { onBlur: handleBlur })}
             />
           </div>
           <div className={styles.row}>
             <TextField
               color="error"
+              InputLabelProps={{ shrink: true }}
               variant="outlined"
-              label={"Endereço"}
-              // disabled
+              label="Endereço"
+              disabled
               type="text"
               sx={{ width: 250 }}
               helperText={
                 errors.endereco && <span>{errors.endereco.message}</span>
               }
-              {...register("endereco")}
+              {...register("endereco", { value: rua })}
             />
             <TextField
               color="error"
