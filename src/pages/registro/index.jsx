@@ -15,6 +15,7 @@ import { listaDePraticas } from "../../utils/listaDePraticas";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { buscarEndereco } from "../../services/cep";
 
 const schema = z.object({
   nome: z.string().min(3, "O nome do local deve conter no mínimo 3 caracteres"),
@@ -31,18 +32,31 @@ export function Registro() {
   const {
     register,
     handleSubmit,
+    getValues,
+    resetField,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
       atividade: "",
       complemento:"",
-      cidade:"",
-      endereco:"",
+      cidade:cidade,
+      endereco:rua,
       descricao:"",
       numero:0,
     },
     resolver: zodResolver(schema),
   });
+  var rua = "Endereço";
+  var cidade ="Cidade";
+
+  async function handleBlur() {
+    const cep = getValues("cep");
+    const enderecoEncontrado = await buscarEndereco(cep);
+    rua = `${enderecoEncontrado.logradouro}`;
+    cidade =`${enderecoEncontrado.localidade}`
+    resetField("endereco", { defaultValue: rua });
+    resetField("cidade", { defaultValue: cidade });
+  }
 
   function onSubmit(values) {
     console.log(values);
@@ -119,16 +133,18 @@ export function Registro() {
             required
             sx={{ width: 390 }}
             helperText= {errors.cep && <span>{errors.cep.message}</span>}
-            {...register("cep")}
+            {...register("cep" , { onBlur: handleBlur })}
           />
           <TextField
             label="Endereço"
+            InputLabelProps={{ shrink: true }}
             variant="outlined"
             color="error"
+            disabled
             type="text"
             sx={{ width: 390 }}
             helperText= {errors.endereco && <span>{errors.endereco.message}</span>}
-            {...register("endereco")}
+            {...register("endereco" , { value: rua })}
           />
         </div>
         <div className={styles.row}>
@@ -143,12 +159,14 @@ export function Registro() {
           />
           <TextField
             label="Cidade"
+            InputLabelProps={{ shrink: true }}
             variant="outlined"
             color="error"
+            disabled
             type="text"
             sx={{ width: 390 }}
             helperText= {errors.cidade && <span>{errors.cidade.message}</span>}
-            {...register("cidade")}
+            {...register("cidade" , { value: cidade })}
           />
         </div>
         <div className={styles.row}>
