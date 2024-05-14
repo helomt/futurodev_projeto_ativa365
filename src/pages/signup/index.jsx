@@ -47,7 +47,7 @@ export function SignUp() {
   async function handleBlur() {
     const cep = getValues("cep");
     const enderecoEncontrado = await buscarEndereco(cep);
-    rua = `${enderecoEncontrado.logradouro},${enderecoEncontrado.localidade}`;
+    rua = `${enderecoEncontrado.logradouro}`;
     resetField("endereco", { defaultValue: rua });
   }
 
