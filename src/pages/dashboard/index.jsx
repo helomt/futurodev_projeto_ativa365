@@ -3,8 +3,24 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import styles from "./style.module.css";
 import { MapPin, Users } from "lucide-react";
 import ListDash from "../../components/listDash";
+import { useEffect, useState } from "react";
+import { contarLocais } from "../../services/serverLocais";
+import { contarUsuarios } from "../../services/serverUsers";
 
 export function Dashboard() {
+  const [users, setUsers] = useState(0);
+  const [locais, setLocais] = useState(0);
+
+  useEffect(() => {
+    async function buscarContadores() {
+      const qtdLocais = await contarLocais();
+      const qtdUsuarios = await contarUsuarios();
+      setUsers(qtdUsuarios);
+      setLocais(qtdLocais);
+    }
+    buscarContadores();
+  }, []);
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.cardContainerLine}>
@@ -41,7 +57,7 @@ export function Dashboard() {
                     fontSize={36}
                     fontWeight={600}
                   >
-                    25
+                    {users}
                   </Typography>
                 </Box>
                 <Box>
@@ -78,7 +94,7 @@ export function Dashboard() {
                     fontSize={36}
                     fontWeight={600}
                   >
-                    25
+                    {locais}
                   </Typography>
                 </Box>
                 <Box>
@@ -89,7 +105,7 @@ export function Dashboard() {
           </Card>
         </div>
       </div>
-      <div >
+      <div>
         <Typography fontSize={32} fontWeight={500} fontStyle={"oblique"}>
           Locais
         </Typography>
