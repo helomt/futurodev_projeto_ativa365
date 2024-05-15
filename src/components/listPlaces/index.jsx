@@ -12,12 +12,26 @@ import {
 import styles from "./style.module.css";
 import { Pen, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
-import { buscarLocais } from "../../services/serverLocais";
+import { buscarLocais, deletarLocal } from "../../services/serverLocais";
+import { useNavigate } from "react-router-dom";
+
 
 export function ListPlaces() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(2);
   const [locais, setLocais] = useState([]);
+  
+  
+  const navigate = useNavigate()
+
+  async function deleteLocal(id) {
+    await deletarLocal(id);
+  }
+  
+  async function editLocal(id) {
+    navigate(`/dashboard/locais/registro/${id}`)
+  }
+
 
   useEffect(() => {
     async function getLocais() {
@@ -77,10 +91,10 @@ export function ListPlaces() {
                       <TableCell align="right">{item.username}</TableCell>
                       <TableCell align="right">
                         <div>
-                          <IconButton value={item.id}>
+                          <IconButton onClick={() => deleteLocal(item.id)}>
                             <Trash />
                           </IconButton>
-                          <IconButton value={item.id}>
+                          <IconButton onClick={() => editLocal(item.id)}>
                             <Pen />
                           </IconButton>
                         </div>
