@@ -33,7 +33,7 @@ export async function deletarLocal(id) {
 }
 
 //POST
-export async function criarLocal(values, userId) {
+export async function criarLocal(values, username) {
   const id = Number(await buscarUltimoLocal()) + 1;
   const local = {
     id: String(id),
@@ -43,9 +43,9 @@ export async function criarLocal(values, userId) {
     endereco: values.endereco,
     cep: values.cep,
     complemento: values.complemento,
-    localidade: values.localidade,
+    cidade: values.cidade,
     numero: values.numero,
-    userId: userId,
+    username: username,
   };
   const response = await fetch("http://localhost:3000/locais", {
     method: "POST",
@@ -59,7 +59,7 @@ export async function criarLocal(values, userId) {
 }
 
 //PUT
-export async function atualizarLocal(id, values, userId) {
+export async function atualizarLocal(id, values, username) {
   const local = {
     id: id,
     nome: values.nome,
@@ -68,9 +68,9 @@ export async function atualizarLocal(id, values, userId) {
     endereco: values.endereco,
     cep: values.cep,
     complemento: values.complemento,
-    localidade: values.localidade,
+    cidade: values.cidade,
     numero: values.numero,
-    userId: userId,
+    username: username,
   };
   const response = await fetch(`http://localhost:3000/locais/${id}`, {
     method: "PUT",
@@ -106,7 +106,7 @@ export async function buscarUltimoLocal() {
 //   numero: 25,
 // }
 
-// var userId = "2"
-// console.log(await criarLocal(local,userId))
+// var userName = "Heloisa Tavares"
+// console.log(await criarLocal(local,userName))
 
 // // console.log(await buscarUmLocal("1"));
