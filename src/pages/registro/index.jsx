@@ -16,6 +16,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buscarEndereco } from "../../services/cep";
+import { useNavigate } from "react-router-dom";
+import { criarLocal } from "../../services/serverLocais";
 
 const schema = z.object({
   nome: z.string().min(3, "O nome do local deve conter no mínimo 3 caracteres"),
@@ -49,6 +51,9 @@ export function Registro() {
   var rua = "Endereço";
   var cidade ="Cidade";
 
+  const navigate = useNavigate();
+
+
   async function handleBlur() {
     const cep = getValues("cep");
     const enderecoEncontrado = await buscarEndereco(cep);
@@ -58,9 +63,19 @@ export function Registro() {
     resetField("cidade", { defaultValue: cidade });
   }
 
-  function onSubmit(values) {
-    console.log(values);
+  async function onSubmit(values) {
+    if(values.endereco != "Endereço"){
+      // userName provisório
+      await criarLocal(values,"Heloisa")
+      alert("Local cadastrado com sucesso");
+      navigate('/dashboard/locais')
+    } else{
+      alert ("Erro no CEP e/ou Endereço.\nLocal não cadastrado.")
+    }
+    
+    
   }
+
 
   return (
     <div>
@@ -192,7 +207,7 @@ export function Registro() {
             "&:hover": { backgroundColor: "#F35359" },
           }}
         >
-          {isSubmitting ? <CircularProgress /> : "Cadastrar"}
+          {isSubmitting ? <CircularProgress disableShrink sx={{color: "#0F0F0F",}}/> : "Cadastrar"}
           
         </Button>
       </form>
