@@ -1,42 +1,34 @@
-import * as React from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from "@mui/material";
 
-import { styled } from "@mui/material";
-const columns = [
-  { id: "local", label: "Localidade", width: 170},
-  {
-    id: "usuario",
-    label: "Usuário",
-    minWidth: 170,
-    align: "left",
-  },
-];
+import { useEffect, useState } from "react";
 
-function createData(local, usuario) {
-  return { local, usuario };
-}
-
-const rows = [
-  createData("Jurere ", "Gustavo"),
-  createData("Academia Bio Ritmo", "Heloisa"),
-  createData("Jurere ", "Gustavo"),
-  createData("Academia Bio Ritmo", "Heloisa"),
-  createData("Jurere ", "Gustavo"),
-  createData("Academia Bio Ritmo", "Heloisa"),
-  createData("Jurere ", "Gustavo"),
-  createData("Academia Bio Ritmo", "Heloisa"),
-];
+import styles from "./style.module.css";
+import { buscarLocais } from "../../services/serverLocais";
 
 export default function ListDash() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(2);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [locais, setLocais] = useState([]);
+
+  useEffect(() => {
+    async function getLocais() {
+      const dados = await buscarLocais();
+      if (dados) {
+        setLocais(dados);
+      }
+    }
+
+    getLocais();
+  }, [locais]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -47,61 +39,45 @@ export default function ListDash() {
     setPage(0);
   };
 
-  const StyledTableCell = styled(TableCell)(() => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#0F0F0F",
-      color: '#F4F6F4',
-      fontSize: 16,
-    },
-  }));
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper sx={{ width: "100%", overflow: "hidden" }} className={styles.table}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead sx={{}}>
             <TableRow>
-              {columns.map((column) => (
-                <StyledTableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </StyledTableCell>
-              ))}
+              <TableCell>Local</TableCell>
+              <TableCell align="left">Usuário</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
-            {rows
+            {locais
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+              .map((item) => (
+                <TableRow
+                  key={item.id}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                  }}
+                >
+                  <TableCell component="th" scope="row">
+                    {item.nome}
+                  </TableCell>
+                  <TableCell align="left">{item.username}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
+        <TablePagination
+          rowsPerPageOptions={[4, 10]}
+          component="div"
+          count={locais.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[2, 5]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }
