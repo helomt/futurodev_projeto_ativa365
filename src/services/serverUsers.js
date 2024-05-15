@@ -103,8 +103,13 @@ export async function contarUsuarios() {
 
 export async function buscarUltimoUsuario() {
   const lista = await buscarUsuarios();
-  const id = lista.at(-1).id;
-  return id;
+  if (lista.length === 0) {
+    const id = 0;
+    return id;
+  } else {
+    const id = lista.at(-1).id;
+    return id;
+  }
 }
 
 export async function validacaoEntradaUsuario(email, senha) {
