@@ -2,19 +2,20 @@ import { CircularProgress, TextField, Typography } from "@mui/material";
 import styles from "./style.module.css";
 import { ButtonForm } from "../../components/buttonForm/buttonForm";
 import { PublicTemplate } from "../../template/public";
-import { Link } from "react-router-dom";
+import { Link, useNavigate,} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buscarEndereco } from "../../services/cep";
+import {
+  criarUsuario,
+  validacaoCpf,
+  validacaoEmail,
+} from "../../services/serverUsers";
 
 const schema = z.object({
   nome: z
-    .string()
-    .regex(
-      /^([A-Z][a-z]{3,} )([A-Z][a-z]{3,} )?([A-Z][a-z]{3,})$/,
-      "Você deve registrar ao menos 2 nomes"
-    ),
+    .string().min(4,"Você deve registrar um nome com 4 letras"),
   data: z.string(),
   cpf: z.string().regex(/[0-9]{11}/, "CPF deve conter 11 números"),
   email: z.string().email("Endereço de email inválido"),
@@ -38,7 +39,7 @@ export function SignUp() {
     defaultValues: {
       complemento: "",
       endereco: rua,
-      numero: 0,
+      numero:0,
     },
     resolver: zodResolver(schema),
   });
@@ -51,8 +52,23 @@ export function SignUp() {
     resetField("endereco", { defaultValue: rua });
   }
 
+  const navigate = useNavigate();
+
   async function onSubmit(values) {
-    console.log(values);
+    if(values.endereco != "Endereço"){
+      const cpfInvalido = await validacaoCpf(values.cpf);
+      const emailInvalido = await validacaoEmail(values.email);
+      if (cpfInvalido || emailInvalido) {
+        alert("Usuário já cadastrado");
+      } else {
+        await criarUsuario(values);
+        alert("Usuário cadastrado com sucesso");
+        navigate('/')
+      }
+    } else {
+      alert("Erro no CEP e/ou Endereço.")
+    }
+    
   }
 
   return (
@@ -117,7 +133,7 @@ export function SignUp() {
               variant="outlined"
               label={"Senha"}
               required
-              type="text"
+              type="password"
               sx={{ width: 250 }}
               helperText={errors.senha && <span>{errors.senha.message}</span>}
               {...register("senha")}
@@ -172,7 +188,7 @@ export function SignUp() {
             />
           </div>
           <ButtonForm type="submit" disabled={isSubmitting}>
-            {isSubmitting ? <CircularProgress /> : "Cadastrar"}
+            {isSubmitting ? <CircularProgress disableShrink sx={{color: "#0F0F0F",}}/> : "Cadastrar"}
           </ButtonForm>
         </form>
         <Link to={"/"}>
