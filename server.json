@@ -124,51 +124,51 @@
   "locais": [
     {
       "id": "1",
-      "nome": "Academia",
-      "atividade": "corrida",
-      "descricao": "",
-      "cep": "88705060",
-      "endereco": "RUa xxx",
-      "numero": 10,
-      "localidade": "Tubarão",
-      "complemento": "",
-      "usuarioId": "2"
-    },
-    {
-      "id": "2",
-      "nome": "Plenum",
-      "atividade": "Escalada",
-      "descricao": "",
-      "endereco": "Rua José",
-      "cep": "88705060",
-      "complemento": "",
-      "localidade": "Tubarão",
-      "numero": 25,
-      "userId": "2"
-    },
-    {
-      "id": "3",
-      "nome": "Plenum",
-      "atividade": "Escalada",
-      "descricao": "",
-      "endereco": "Rua José",
-      "cep": "88705060",
-      "complemento": "",
-      "localidade": "Tubarão",
-      "numero": 25,
-      "userId": "2"
+      "nome": "Clube 29",
+      "atividade": "Musculação",
+      "descricao": "Clube com churrasqueiras",
+      "endereco": "Avenida Marcolino Martins Cabral",
+      "cep": "88705007",
+      "complemento": "Fim da Avenida",
+      "cidade": "Tubarão",
+      "numero": 4083,
+      "username": "Ana"
     },
     {
       "id": "4",
-      "nome": "Box Zero",
+      "nome": "Att",
       "atividade": "Crossfit",
-      "descricao": "Box de Cross",
-      "endereco": "Rua Princesa Izabel",
-      "cep": "88702275",
+      "descricao": "Ambiente incrivel",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
       "complemento": "Sala 2",
       "cidade": "Tubarão",
-      "numero": 744,
-      "username": "Heloisa"
+      "numero": 789,
+      "username": "Ana"
+    },
+    {
+      "id": "5",
+      "nome": "Clube de campo",
+      "atividade": "Canoagem",
+      "descricao": "dasdas",
+      "endereco": "Rua Wenceslau Bráz",
+      "cep": "88705070",
+      "complemento": "",
+      "cidade": "Tubarão",
+      "numero": 5,
+      "username": "Ana"
+    },
+    {
+      "id": "6",
+      "nome": "Clube de Campo",
+      "atividade": "Crossfit",
+      "descricao": "",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "",
+      "cidade": "Tubarão",
+      "numero": 227,
+      "username": "Ana"
     }
   ]
 }
