@@ -19,7 +19,7 @@ export function Dashboard() {
       setLocais(qtdLocais);
     }
     buscarContadores();
-  }, []);
+  }, [users, locais]);
 
   return (
     <div className={styles.mainContainer}>
