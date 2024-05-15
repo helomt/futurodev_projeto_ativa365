@@ -91,8 +91,13 @@ export async function contarLocais() {
 
 export async function buscarUltimoLocal() {
   const lista = await buscarLocais();
-  const id = lista.at(-1).id;
-  return id;
+  if (lista.length === 0) {
+    const id = 0;
+    return id;
+  } else {
+    const id = lista.at(-1).id;
+    return id;
+  }
 }
 
 // var local = {
