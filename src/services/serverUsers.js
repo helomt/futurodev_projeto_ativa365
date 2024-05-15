@@ -115,11 +115,7 @@ export async function validacaoEntradaUsuario(email, senha) {
     }
   );
   const data = await response.json();
-  console.log(data[0].id); //
   if (data.length === 1) {
-    // setUser(data);
-    // localStorage.setItem("@labmoney:user", JSON.stringify(data));
-
     return [true, data];
   } else {
     return [false, data];
@@ -140,10 +136,8 @@ export async function validacaoEmail(email) {
   const lista = await buscarUmUsuarioEmail(email);
   const listaFiltrada = lista.filter((element) => element.email === email);
   if (listaFiltrada.length > 0) {
-    console.log("já cadastrado")
     return true;
   } else{
-    console.log("não cadastrado")
     return false;
   }
 }
