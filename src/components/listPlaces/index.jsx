@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Box,
   IconButton,
@@ -13,17 +11,31 @@ import {
 } from "@mui/material";
 import styles from "./style.module.css";
 import { Pen, Trash } from "lucide-react";
+import { useEffect, useState } from "react";
+import { buscarLocais } from "../../services/serverLocais";
 
 export function ListPlaces() {
-  const [page, setPage] = React.useState(2);
-  const [rowsPerPage, setRowsPerPage] = React.useState(2);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(2);
+  const [locais, setLocais] = useState([]);
+
+  useEffect(() => {
+    async function getLocais() {
+      const dados = await buscarLocais();
+      if (dados) {
+        setLocais(dados);
+      }
+    }
+
+    getLocais();
+  }, [locais]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
@@ -32,8 +44,12 @@ export function ListPlaces() {
       <Box className={styles.list}>
         <Box>
           <TableContainer>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
+            <Table
+              stickyHeader
+              sx={{ minWidth: 650 }}
+              aria-label="simple table"
+            >
+              <TableHead sx={{}}>
                 <TableRow>
                   <TableCell>Local</TableCell>
                   <TableCell align="right">Cidade</TableCell>
@@ -42,53 +58,41 @@ export function ListPlaces() {
                   <TableCell align="right">Opções</TableCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    Academia
-                  </TableCell>
-                  <TableCell align="right">TUbarão</TableCell>
-                  <TableCell align="right">Musculação</TableCell>
-                  <TableCell align="right">Gustavo</TableCell>
-                  <TableCell align="right">
-                    <div>
-                      <IconButton>
-                        <Trash />
-                      </IconButton>
-                      <IconButton>
-                        <Pen />
-                      </IconButton>
-                    </div>
-                  </TableCell>
-                </TableRow>
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    Academia
-                  </TableCell>
-                  <TableCell align="right">TUbarão</TableCell>
-                  <TableCell align="right">Musculação</TableCell>
-                  <TableCell align="right">Gustavo</TableCell>
-                  <TableCell align="right">
-                    <div>
-                      <IconButton>
-                        <Trash />
-                      </IconButton>
-                      <IconButton>
-                        <Pen />
-                      </IconButton>
-                    </div>
-                  </TableCell>
-                </TableRow>
+                {locais
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item) => (
+                    <TableRow
+                      key={item.id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {item.nome}
+                      </TableCell>
+                      <TableCell align="right">{item.cidade}</TableCell>
+                      <TableCell align="right">{item.atividade}</TableCell>
+                      <TableCell align="right">{item.username}</TableCell>
+                      <TableCell align="right">
+                        <div>
+                          <IconButton value={item.id}>
+                            <Trash />
+                          </IconButton>
+                          <IconButton value={item.id}>
+                            <Pen />
+                          </IconButton>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
             <TablePagination
-            rowsPerPageOptions={[1, 2, 100]}
+              rowsPerPageOptions={[1, 2, 10]}
               component="div"
-              count={100}
+              count={locais.length}
               page={page}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
