@@ -16,8 +16,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buscarEndereco } from "../../services/cep";
-import { useNavigate } from "react-router-dom";
-import { criarLocal } from "../../services/serverLocais";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  atualizarLocal,
+  buscarUmLocal,
+  criarLocal,
+} from "../../services/serverLocais";
+import { useEffect } from "react";
 
 const schema = z.object({
   nome: z.string().min(3, "O nome do local deve conter no mínimo 3 caracteres"),
@@ -31,51 +36,87 @@ const schema = z.object({
 });
 
 export function Registro() {
+  const navigate = useNavigate();
+  const url = useParams();
+  var rua = "Endereço";
+  var cidade = "Cidade";
+  
   const {
     register,
     handleSubmit,
     getValues,
     resetField,
+    setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
+      nome: "",
       atividade: "",
-      complemento:"",
-      cidade:cidade,
-      endereco:rua,
-      descricao:"",
-      numero:0,
+      complemento: "",
+      cidade: cidade,
+      endereco: rua,
+      descricao: "",
+      numero: 0,
     },
     resolver: zodResolver(schema),
   });
-  var rua = "Endereço";
-  var cidade ="Cidade";
 
-  const navigate = useNavigate();
+
+
+
+  async function setFields(id) {
+    if (url.id > 0) {
+      const data = await buscarUmLocal(id);
+      setValue("nome",  data.nome );
+      setValue("atividade", data.atividade);
+      setValue("descricao", data.descricao);
+      setValue("cep", data.cep);
+      setValue("endereco", data.endereco);
+      setValue("numero", data.numero);
+      setValue("cidade", data.cidade);
+      setValue("complemento", data.complemento);
+    } else {
+      console.log("nada");
+    }
+  }
+
+  useEffect(() => {
+    if (url.id > 0) {
+      setFields(url.id);
+    }
+  },[url.id]);
 
 
   async function handleBlur() {
     const cep = getValues("cep");
     const enderecoEncontrado = await buscarEndereco(cep);
     rua = `${enderecoEncontrado.logradouro}`;
-    cidade =`${enderecoEncontrado.localidade}`
+    cidade = `${enderecoEncontrado.localidade}`;
     resetField("endereco", { defaultValue: rua });
     resetField("cidade", { defaultValue: cidade });
   }
 
   async function onSubmit(values) {
-    if(values.endereco != "Endereço"){
-      // userName provisório
-      await criarLocal(values,"Heloisa")
-      alert("Local cadastrado com sucesso");
-      navigate('/dashboard/locais')
-    } else{
-      alert ("Erro no CEP e/ou Endereço.\nLocal não cadastrado.")
+    if (url.id > 0) {
+      if (values.endereco != "Endereço") {
+        await atualizarLocal(url.id, values, "Ana");
+        alert("Local atualizado com sucesso");
+        navigate("/dashboard/locais");
+      } else {
+        alert("Erro no CEP e/ou Endereço.\nLocal não atualizado.");
+      }
+    } else {
+      if (values.endereco != "Endereço") {
+        // userName provisório
+        await criarLocal(values, "Heloisa");
+        alert("Local cadastrado com sucesso");
+        navigate("/dashboard/locais");
+      } else {
+        alert("Erro no CEP e/ou Endereço.\nLocal não cadastrado.");
+      }
     }
-    
-    
   }
-
 
   return (
     <div>
@@ -96,6 +137,8 @@ export function Registro() {
         <div className={styles.row}>
           <TextField
             label="Nome do local"
+            placeholder="Nome do local"
+            InputLabelProps={{ shrink: true }}
             variant="outlined"
             color="error"
             type="text"
@@ -105,15 +148,16 @@ export function Registro() {
             {...register("nome")}
           />
           <div>
+            <Typography fontSize={3}></Typography>
             <FormControl required color="error">
-              <InputLabel id="atividade">Atividade</InputLabel>
+              <InputLabel id="atividade">
+                {url.id > 0 ? watch("atividade") : "Atividade"}
+              </InputLabel>
               <Select
                 labelId="atividade"
-                label="Atividade"
                 color="error"
-                defaultValue={''}
+                defaultValue={"" }
                 sx={{ width: 390 }}
-                
                 {...register("atividade")}
               >
                 {listaDePraticas.map((item, index) => (
@@ -122,33 +166,41 @@ export function Registro() {
                   </MenuItem>
                 ))}
               </Select>
-              <FormHelperText>{errors.atividade && <span>{errors.atividade.message}</span>}</FormHelperText>
+              <FormHelperText>
+                {errors.atividade && <span>{errors.atividade.message}</span>}
+              </FormHelperText>
             </FormControl>
           </div>
         </div>
         <div className={styles.row}>
           <TextField
             label="Descrição"
+            placeholder="Descreva o local"
             color="error"
             type="text"
+            InputLabelProps={{ shrink: true }}
             variant="outlined"
             multiline
             rows={2}
             sx={{ width: 785 }}
-            helperText= {errors.descricao && <span>{errors.descricao.message}</span>}
+            helperText={
+              errors.descricao && <span>{errors.descricao.message}</span>
+            }
             {...register("descricao")}
           />
         </div>
         <div className={styles.row}>
           <TextField
             label="CEP"
+            placeholder="CEP"
             variant="outlined"
             color="error"
             type="text"
+            InputLabelProps={{ shrink: true }}
             required
             sx={{ width: 390 }}
-            helperText= {errors.cep && <span>{errors.cep.message}</span>}
-            {...register("cep" , { onBlur: handleBlur })}
+            helperText={errors.cep && <span>{errors.cep.message}</span>}
+            {...register("cep", { onBlur: handleBlur })}
           />
           <TextField
             label="Endereço"
@@ -158,19 +210,22 @@ export function Registro() {
             disabled
             type="text"
             sx={{ width: 390 }}
-            helperText= {errors.endereco && <span>{errors.endereco.message}</span>}
-            {...register("endereco" , { value: rua })}
+            helperText={
+              errors.endereco && <span>{errors.endereco.message}</span>
+            }
+            {...register("endereco", { value: rua })}
           />
         </div>
         <div className={styles.row}>
           <TextField
             label="Número"
             variant="outlined"
+            InputLabelProps={{ shrink: true }}
             color="error"
             type="number"
             sx={{ width: 390 }}
-            helperText= {errors.numero && <span>{errors.numero.message}</span>}
-            {...register("numero", {valueAsNumber: true})}
+            helperText={errors.numero && <span>{errors.numero.message}</span>}
+            {...register("numero", { valueAsNumber: true })}
           />
           <TextField
             label="Cidade"
@@ -180,8 +235,8 @@ export function Registro() {
             disabled
             type="text"
             sx={{ width: 390 }}
-            helperText= {errors.cidade && <span>{errors.cidade.message}</span>}
-            {...register("cidade" , { value: cidade })}
+            helperText={errors.cidade && <span>{errors.cidade.message}</span>}
+            {...register("cidade", { value: cidade })}
           />
         </div>
         <div className={styles.row}>
@@ -189,10 +244,13 @@ export function Registro() {
             label="Complemento"
             placeholder="Ex.: bloco, apartamento, sala etc..."
             variant="outlined"
+            InputLabelProps={{ shrink: true }}
             color="error"
             type="text"
             sx={{ width: 785 }}
-            helperText= {errors.complemento && <span>{errors.complemento.message}</span>}
+            helperText={
+              errors.complemento && <span>{errors.complemento.message}</span>
+            }
             {...register("complemento")}
           />
         </div>
@@ -207,8 +265,11 @@ export function Registro() {
             "&:hover": { backgroundColor: "#F35359" },
           }}
         >
-          {isSubmitting ? <CircularProgress disableShrink sx={{color: "#0F0F0F",}}/> : "Cadastrar"}
-          
+          {isSubmitting ? (
+            <CircularProgress disableShrink sx={{ color: "#0F0F0F" }} />
+          ) : (
+            "Cadastrar"
+          )}
         </Button>
       </form>
     </div>
