@@ -23,6 +23,102 @@
       "endereco": "rua jose evaristo fogaça",
       "numero": 227,
       "complemento": ""
+    },
+    {
+      "id": "3",
+      "nome": "Ana Tavares",
+      "data": "1986-10-01",
+      "email": "ana@heloisa.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "Apto 1",
+      "cpf": "28875133034",
+      "numero": 227,
+      "senha": "54789"
+    },
+    {
+      "id": "4",
+      "nome": "Iza Tavares",
+      "data": "1967-07-03",
+      "email": "ana@heloisa.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "Apto 10",
+      "cpf": "28875133034",
+      "numero": 227,
+      "senha": "54789"
+    },
+    {
+      "id": "5",
+      "nome": "Rtr Rerer",
+      "data": "2024-05-24",
+      "email": "blah@blah.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "",
+      "cpf": "15987456321",
+      "numero": 5,
+      "senha": "564587"
+    },
+    {
+      "id": "6",
+      "nome": "Rtr Rerer",
+      "data": "2024-05-24",
+      "email": "blah@blahs.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "",
+      "cpf": "15987456345",
+      "numero": 5,
+      "senha": "564587"
+    },
+    {
+      "id": "7",
+      "nome": "Rtr Rerer",
+      "data": "2024-05-24",
+      "email": "blah@blahs.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "",
+      "cpf": "15987456346",
+      "numero": 5,
+      "senha": "564587"
+    },
+    {
+      "id": "8",
+      "nome": "Dawd Ddas",
+      "data": "2024-05-11",
+      "email": "ggg@hf.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "",
+      "cpf": "12437687756541",
+      "numero": 3,
+      "senha": "12324"
+    },
+    {
+      "id": "9",
+      "nome": "Anahhd D",
+      "data": "2024-05-23",
+      "email": "an@gr.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "",
+      "cpf": "15657899320",
+      "numero": 8,
+      "senha": "00203"
+    },
+    {
+      "id": "10",
+      "nome": "Helo Tava",
+      "data": "1988-12-08",
+      "email": "heloisar@heloisa.com",
+      "endereco": "Rua José Evaristo Fogaça",
+      "cep": "88705060",
+      "complemento": "casa",
+      "cpf": "07204235945",
+      "numero": 35,
+      "senha": "1235"
     }
   ],
   "locais": [
@@ -61,6 +157,18 @@
       "localidade": "Tubarão",
       "numero": 25,
       "userId": "2"
+    },
+    {
+      "id": "4",
+      "nome": "Box Zero",
+      "atividade": "Crossfit",
+      "descricao": "Box de Cross",
+      "endereco": "Rua Princesa Izabel",
+      "cep": "88702275",
+      "complemento": "Sala 2",
+      "cidade": "Tubarão",
+      "numero": 744,
+      "username": "Heloisa"
     }
   ]
 }
