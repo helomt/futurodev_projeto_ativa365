@@ -23,6 +23,7 @@ import {
   criarLocal,
 } from "../../services/serverLocais";
 import { useEffect } from "react";
+import { getLocalUserName } from "../../services/localUser";
 
 const schema = z.object({
   nome: z.string().min(3, "O nome do local deve conter no mínimo 3 caracteres"),
@@ -40,7 +41,7 @@ export function Registro() {
   const url = useParams();
   var rua = "Endereço";
   var cidade = "Cidade";
-  
+
   const {
     register,
     handleSubmit,
@@ -62,13 +63,10 @@ export function Registro() {
     resolver: zodResolver(schema),
   });
 
-
-
-
   async function setFields(id) {
     if (url.id > 0) {
       const data = await buscarUmLocal(id);
-      setValue("nome",  data.nome );
+      setValue("nome", data.nome);
       setValue("atividade", data.atividade);
       setValue("descricao", data.descricao);
       setValue("cep", data.cep);
@@ -85,8 +83,7 @@ export function Registro() {
     if (url.id > 0) {
       setFields(url.id);
     }
-  },[url.id]);
-
+  }, [url.id]);
 
   async function handleBlur() {
     const cep = getValues("cep");
@@ -98,9 +95,10 @@ export function Registro() {
   }
 
   async function onSubmit(values) {
+    const username = getLocalUserName();
     if (url.id > 0) {
       if (values.endereco != "Endereço") {
-        await atualizarLocal(url.id, values, "Ana");
+        await atualizarLocal(url.id, values, username);
         alert("Local atualizado com sucesso");
         navigate("/dashboard/locais");
       } else {
@@ -108,8 +106,7 @@ export function Registro() {
       }
     } else {
       if (values.endereco != "Endereço") {
-        // userName provisório
-        await criarLocal(values, "Heloisa");
+        await criarLocal(values, username);
         alert("Local cadastrado com sucesso");
         navigate("/dashboard/locais");
       } else {
@@ -156,7 +153,7 @@ export function Registro() {
               <Select
                 labelId="atividade"
                 color="error"
-                defaultValue={"" }
+                defaultValue={""}
                 sx={{ width: 390 }}
                 {...register("atividade")}
               >
