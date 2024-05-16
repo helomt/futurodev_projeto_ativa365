@@ -24,7 +24,8 @@ import {
 import { Avatar } from "@mui/material";
 
 import styles from "./style.module.css";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../../context/auth-context";
 
 const drawerWidth = 250;
 
@@ -100,6 +101,8 @@ const Drawer = styled(MuiDrawer, {
 export function PrivateTemplate() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { user, signOut } = useAuth();
+  const isUserLogged = !!user;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -109,7 +112,7 @@ export function PrivateTemplate() {
     setOpen(false);
   };
 
-  return (
+  return isUserLogged ? (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
@@ -213,6 +216,7 @@ export function PrivateTemplate() {
         <List className={styles.downList}>
           <ListItem>
             <ListItemButton
+            onClick={signOut}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -249,5 +253,7 @@ export function PrivateTemplate() {
         <Outlet />
       </Box>
     </Box>
+  ) : (
+    <Navigate to="/" />
   );
 }
