@@ -59,7 +59,7 @@ export function SignUp() {
       const cpfInvalido = await validacaoCpf(values.cpf);
       const emailInvalido = await validacaoEmail(values.email);
       if (cpfInvalido || emailInvalido) {
-        alert("Usuário já cadastrado");
+        alert("Usuário já cadastrado\n Favor verificar login e/ou CPF");
       } else {
         await criarUsuario(values);
         alert("Usuário cadastrado com sucesso");
