@@ -35,8 +35,8 @@ export function Login() {
             <Typography fontSize={45} fontWeight={500} color={"#FF0A1B"}>
               Efetue seu login
             </Typography>
-            <Typography fontStyle={"italic"} fontSize={20}>
-              Comece agora a sua jornada{" "}
+            <Typography fontStyle={"italic"} fontSize={16}>
+              E encontre os locais ideais para o seu esporte
             </Typography>
             <form className={styles.form}>
               <TextField
