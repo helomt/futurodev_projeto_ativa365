@@ -1,14 +1,13 @@
-.mainContainer{
-
-    height: 85vh;
+.mainContainer {
+  height: 85vh;
 }
 
-.containerHeader{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+.containerHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
-.table{
-    margin-top: 16px;
+.table {
+  margin-top: 16px;
 }

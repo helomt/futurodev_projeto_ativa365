@@ -1,4 +1,5 @@
 import * as React from "react";
+import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -13,7 +14,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-
+import { Avatar } from "@mui/material";
 import {
   CircleChevronLeft,
   CircleChevronRight,
@@ -21,10 +22,7 @@ import {
   LogOut,
   MapPin,
 } from "lucide-react";
-import { Avatar } from "@mui/material";
-
 import styles from "./style.module.css";
-import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/auth-context";
 
 const drawerWidth = 250;
@@ -216,7 +214,7 @@ export function PrivateTemplate() {
         <List className={styles.downList}>
           <ListItem>
             <ListItemButton
-            onClick={signOut}
+              onClick={signOut}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -238,7 +236,6 @@ export function PrivateTemplate() {
           </ListItem>
         </List>
       </Drawer>
-
       <Box
         component="main"
         sx={{

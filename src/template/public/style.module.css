@@ -1,15 +1,16 @@
 .header {
-  background-color: #0F0F0F;
+  background-color: #0f0f0f;
   height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-.logo{
-    height: 10vh;
-    position: absolute;
-    left: 0;
+
+.logo {
+  height: 10vh;
+  position: absolute;
+  left: 0;
 }
 
 .mainContainer {

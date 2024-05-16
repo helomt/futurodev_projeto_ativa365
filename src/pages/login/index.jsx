@@ -1,13 +1,12 @@
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField, Typography } from "@mui/material";
-import { ButtonFormBlack } from "../../components/buttonFormBlack/buttonFormBlack";
-import { ButtonForm } from "../../components/buttonForm/buttonForm";
-
 import styles from "./style.module.css";
 import { PublicTemplate } from "../../template/public";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useAuth } from "../../context/auth-context";
-import { Helmet } from "react-helmet";
+import { ButtonFormBlack } from "../../components/buttonFormBlack/buttonFormBlack";
+import { ButtonForm } from "../../components/buttonForm/buttonForm";
 
 export function Login() {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ export function Login() {
         <title>Login</title>
         <meta name="description" content="Página de Login do App" />
       </Helmet>
-
       <PublicTemplate>
         <div>
           <div className={styles.container}>

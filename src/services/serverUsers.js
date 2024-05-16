@@ -31,7 +31,6 @@ export async function buscarUmUsuarioEmail(email) {
   return data;
 }
 
-// meter um if aqui dentro
 // DELETE
 export async function deletarUsuario(id) {
   const response = await fetch(`http://localhost:3000/users/${id}`, {
@@ -132,7 +131,7 @@ export async function validacaoCpf(cpf) {
   const listaFiltrada = lista.filter((element) => element.cpf === cpf);
   if (listaFiltrada.length > 0) {
     return true;
-  } else{
+  } else {
     return false;
   }
 }
@@ -142,13 +141,11 @@ export async function validacaoEmail(email) {
   const listaFiltrada = lista.filter((element) => element.email === email);
   if (listaFiltrada.length > 0) {
     return true;
-  } else{
+  } else {
     return false;
   }
 }
-
-// const res =(await validacaoEntradaUsuario("vitor@heloisa.com","1234"))
-
+// Emxeplo de user para testes
 // const usuario = {
 //     nome: "Vitor Tavares",
 //     data: "2015-07-01",

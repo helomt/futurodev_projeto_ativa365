@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 function App() {
   return (
     <>
-    <Helmet titleTemplate="%s - Ativa365"/>
+      <Helmet titleTemplate="%s - Ativa365" />
       <AuthProvider>
         <RouterProvider router={routes} />
       </AuthProvider>

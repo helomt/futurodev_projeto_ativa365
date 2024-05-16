@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Paper,
   Table,
@@ -8,9 +9,6 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-
-import { useEffect, useState } from "react";
-
 import styles from "./style.module.css";
 import { buscarLocais } from "../../services/serverLocais";
 

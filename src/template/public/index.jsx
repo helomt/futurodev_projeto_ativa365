@@ -1,7 +1,7 @@
-import styles from "./style.module.css";
 import PropTypes from "prop-types";
-
 import { Typography } from "@mui/material";
+import styles from "./style.module.css";
+
 
 export function PublicTemplate({ children }) {
   return (

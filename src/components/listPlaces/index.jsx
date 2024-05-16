@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   IconButton,
@@ -9,11 +11,9 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import styles from "./style.module.css";
 import { Pen, Trash } from "lucide-react";
-import { useEffect, useState } from "react";
 import { buscarLocais, deletarLocal } from "../../services/serverLocais";
-import { useNavigate } from "react-router-dom";
+import styles from "./style.module.css";
 
 
 export function ListPlaces() {

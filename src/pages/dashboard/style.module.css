@@ -11,10 +11,10 @@
   padding: 10px;
 }
 
-.containerText{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.containerText {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .cardContentContainer {

@@ -1,7 +1,6 @@
 .toolbar {
   background-color: #0f0f0f;
   display: flex;
-
   width: 100%;
 }
 
@@ -27,17 +26,19 @@
 .drawerHeader {
   gap: 6rem;
 }
+
 .navIcon {
   color: #f4f6f4;
 }
 
-/* .navIcon :global(.active) {
-  color: #ff0a1b;
-} */
-
 .navButton {
   color: #f4f6f4;
 }
+
+/* Tentativa de usar a função global */
+/* .navIcon :global(.active) {
+  color: #ff0a1b;
+} */
 
 /* .navButton :global(.active) {
   color: #ff0a1b;

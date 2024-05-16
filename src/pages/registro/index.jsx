@@ -1,3 +1,9 @@
+import { useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import {
   Button,
   CircularProgress,
@@ -9,22 +15,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
 import styles from "./style.module.css";
 import { listaDePraticas } from "../../utils/listaDePraticas";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { buscarEndereco } from "../../services/cep";
-import { useNavigate, useParams } from "react-router-dom";
 import {
   atualizarLocal,
   buscarUmLocal,
   criarLocal,
 } from "../../services/serverLocais";
-import { useEffect } from "react";
 import { getLocalUserName } from "../../services/localUser";
-import { Helmet } from "react-helmet";
 
 const schema = z.object({
   nome: z.string().min(3, "O nome do local deve conter no mínimo 3 caracteres"),
@@ -116,165 +115,166 @@ export function Registro() {
     }
   }
 
-  return (<>
-  <Helmet>
-    <title>Registro de Local</title>
-    <meta name="description" content="Página de cadastro de Locais"/>
-  </Helmet>
-    <div>
+  return (
+    <>
+      <Helmet>
+        <title>Registro de Local</title>
+        <meta name="description" content="Página de cadastro de Locais" />
+      </Helmet>
       <div>
-        <Typography fontSize={40} fontWeight={500} fontStyle={"oblique"}>
-          Registro de localidade
-        </Typography>
-        <Typography>
-          Preencha os campos abaixo para adicionar um novo local de práticas
-          esportivas
-        </Typography>
-      </div>
-      <form
-        className={styles.form}
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className={styles.row}>
-          <TextField
-            label="Nome do local"
-            placeholder="Nome do local"
-            InputLabelProps={{ shrink: true }}
-            variant="outlined"
-            color="error"
-            type="text"
-            required
-            sx={{ width: 390 }}
-            helperText={errors.nome && <span>{errors.nome.message}</span>}
-            {...register("nome")}
-          />
-          <div>
-            <Typography fontSize={3}></Typography>
-            <FormControl required color="error">
-              <InputLabel id="atividade">
-                {url.id > 0 ? watch("atividade") : "Atividade"}
-              </InputLabel>
-              <Select
-                labelId="atividade"
-                color="error"
-                defaultValue={""}
-                sx={{ width: 390 }}
-                {...register("atividade")}
-              >
-                {listaDePraticas.map((item, index) => (
-                  <MenuItem key={index} value={item}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </Select>
-              <FormHelperText>
-                {errors.atividade && <span>{errors.atividade.message}</span>}
-              </FormHelperText>
-            </FormControl>
-          </div>
+        <div>
+          <Typography fontSize={40} fontWeight={500} fontStyle={"oblique"}>
+            Registro de localidade
+          </Typography>
+          <Typography>
+            Preencha os campos abaixo para adicionar um novo local de práticas
+            esportivas
+          </Typography>
         </div>
-        <div className={styles.row}>
-          <TextField
-            label="Descrição"
-            placeholder="Descreva o local"
-            color="error"
-            type="text"
-            InputLabelProps={{ shrink: true }}
-            variant="outlined"
-            multiline
-            rows={2}
-            sx={{ width: 785 }}
-            helperText={
-              errors.descricao && <span>{errors.descricao.message}</span>
-            }
-            {...register("descricao")}
-          />
-        </div>
-        <div className={styles.row}>
-          <TextField
-            label="CEP"
-            placeholder="CEP"
-            variant="outlined"
-            color="error"
-            type="text"
-            InputLabelProps={{ shrink: true }}
-            required
-            sx={{ width: 390 }}
-            helperText={errors.cep && <span>{errors.cep.message}</span>}
-            {...register("cep", { onBlur: handleBlur })}
-          />
-          <TextField
-            label="Endereço"
-            InputLabelProps={{ shrink: true }}
-            variant="outlined"
-            color="error"
-            disabled
-            type="text"
-            sx={{ width: 390 }}
-            helperText={
-              errors.endereco && <span>{errors.endereco.message}</span>
-            }
-            {...register("endereco", { value: rua })}
-          />
-        </div>
-        <div className={styles.row}>
-          <TextField
-            label="Número"
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            color="error"
-            type="number"
-            sx={{ width: 390 }}
-            helperText={errors.numero && <span>{errors.numero.message}</span>}
-            {...register("numero", { valueAsNumber: true })}
-          />
-          <TextField
-            label="Cidade"
-            InputLabelProps={{ shrink: true }}
-            variant="outlined"
-            color="error"
-            disabled
-            type="text"
-            sx={{ width: 390 }}
-            helperText={errors.cidade && <span>{errors.cidade.message}</span>}
-            {...register("cidade", { value: cidade })}
-          />
-        </div>
-        <div className={styles.row}>
-          <TextField
-            label="Complemento"
-            placeholder="Ex.: bloco, apartamento, sala etc..."
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            color="error"
-            type="text"
-            sx={{ width: 785 }}
-            helperText={
-              errors.complemento && <span>{errors.complemento.message}</span>
-            }
-            {...register("complemento")}
-          />
-        </div>
-        <div></div>
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{
-            width: 785,
-            height: 50,
-            bgcolor: "#FF0A1B",
-            "&:hover": { backgroundColor: "#F35359" },
-          }}
+        <form
+          className={styles.form}
+          autoComplete="off"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          {isSubmitting ? (
-            <CircularProgress disableShrink sx={{ color: "#0F0F0F" }} />
-          ) : (
-            "Cadastrar"
-          )}
-        </Button>
-      </form>
-    </div>
+          <div className={styles.row}>
+            <TextField
+              label="Nome do local"
+              placeholder="Nome do local"
+              InputLabelProps={{ shrink: true }}
+              variant="outlined"
+              color="error"
+              type="text"
+              required
+              sx={{ width: 390 }}
+              helperText={errors.nome && <span>{errors.nome.message}</span>}
+              {...register("nome")}
+            />
+            <div>
+              <Typography fontSize={3}></Typography>
+              <FormControl required color="error">
+                <InputLabel id="atividade">
+                  {url.id > 0 ? watch("atividade") : "Atividade"}
+                </InputLabel>
+                <Select
+                  labelId="atividade"
+                  color="error"
+                  defaultValue={""}
+                  sx={{ width: 390 }}
+                  {...register("atividade")}
+                >
+                  {listaDePraticas.map((item, index) => (
+                    <MenuItem key={index} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>
+                  {errors.atividade && <span>{errors.atividade.message}</span>}
+                </FormHelperText>
+              </FormControl>
+            </div>
+          </div>
+          <div className={styles.row}>
+            <TextField
+              label="Descrição"
+              placeholder="Descreva o local"
+              color="error"
+              type="text"
+              InputLabelProps={{ shrink: true }}
+              variant="outlined"
+              multiline
+              rows={2}
+              sx={{ width: 785 }}
+              helperText={
+                errors.descricao && <span>{errors.descricao.message}</span>
+              }
+              {...register("descricao")}
+            />
+          </div>
+          <div className={styles.row}>
+            <TextField
+              label="CEP"
+              placeholder="CEP"
+              variant="outlined"
+              color="error"
+              type="text"
+              InputLabelProps={{ shrink: true }}
+              required
+              sx={{ width: 390 }}
+              helperText={errors.cep && <span>{errors.cep.message}</span>}
+              {...register("cep", { onBlur: handleBlur })}
+            />
+            <TextField
+              label="Endereço"
+              InputLabelProps={{ shrink: true }}
+              variant="outlined"
+              color="error"
+              disabled
+              type="text"
+              sx={{ width: 390 }}
+              helperText={
+                errors.endereco && <span>{errors.endereco.message}</span>
+              }
+              {...register("endereco", { value: rua })}
+            />
+          </div>
+          <div className={styles.row}>
+            <TextField
+              label="Número"
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+              color="error"
+              type="number"
+              sx={{ width: 390 }}
+              helperText={errors.numero && <span>{errors.numero.message}</span>}
+              {...register("numero", { valueAsNumber: true })}
+            />
+            <TextField
+              label="Cidade"
+              InputLabelProps={{ shrink: true }}
+              variant="outlined"
+              color="error"
+              disabled
+              type="text"
+              sx={{ width: 390 }}
+              helperText={errors.cidade && <span>{errors.cidade.message}</span>}
+              {...register("cidade", { value: cidade })}
+            />
+          </div>
+          <div className={styles.row}>
+            <TextField
+              label="Complemento"
+              placeholder="Ex.: bloco, apartamento, sala etc..."
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+              color="error"
+              type="text"
+              sx={{ width: 785 }}
+              helperText={
+                errors.complemento && <span>{errors.complemento.message}</span>
+              }
+              {...register("complemento")}
+            />
+          </div>
+          <div></div>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              width: 785,
+              height: 50,
+              bgcolor: "#FF0A1B",
+              "&:hover": { backgroundColor: "#F35359" },
+            }}
+          >
+            {isSubmitting ? (
+              <CircularProgress disableShrink sx={{ color: "#0F0F0F" }} />
+            ) : (
+              "Cadastrar"
+            )}
+          </Button>
+        </form>
+      </div>
     </>
   );
 }

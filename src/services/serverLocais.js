@@ -100,6 +100,7 @@ export async function buscarUltimoLocal() {
   }
 }
 
+// Exemplo de local para teste
 // var local = {
 //   nome: "Plenum",
 //   atividade: "Escalada",
@@ -112,6 +113,3 @@ export async function buscarUltimoLocal() {
 // }
 
 // var userName = "Heloisa Tavares"
-// console.log(await criarLocal(local,userName))
-
-// // console.log(await buscarUmLocal("1"));
