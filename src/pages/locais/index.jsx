@@ -5,9 +5,14 @@ import {
 import styles from "./style.module.css";
 import { Link } from "react-router-dom";
 import { ListPlaces } from "../../components/listPlaces";
+import { Helmet } from "react-helmet";
 
 export function Locais() {
-  return (
+  return (<>
+  <Helmet>
+      <title>Locais</title>
+      <meta name="description" content="Página de listagem do todos os locais cadastrados"/>
+    </Helmet>
     <div className={styles.mainContainer}>
       <div className={styles.containerHeader}>
         <div>
@@ -38,5 +43,6 @@ export function Locais() {
         <ListPlaces></ListPlaces>
       </div>
     </div>
+              </>
   );
 }

@@ -12,6 +12,7 @@ import {
   validacaoCpf,
   validacaoEmail,
 } from "../../services/serverUsers";
+import { Helmet } from "react-helmet";
 
 const schema = z.object({
   nome: z
@@ -71,7 +72,11 @@ export function SignUp() {
     
   }
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Cadastro</title>
+      <meta name="description" content="Página de cadastro de novos usuários"/>
+    </Helmet>
     <PublicTemplate>
       <div className={styles.container}>
         <Typography fontSize={35} fontWeight={500} color={"#FF0A1B"}>
@@ -185,7 +190,7 @@ export function SignUp() {
                 errors.complemento && <span>{errors.complemento.message}</span>
               }
               {...register("complemento")}
-            />
+              />
           </div>
           <ButtonForm type="submit" disabled={isSubmitting}>
             {isSubmitting ? <CircularProgress disableShrink sx={{color: "#0F0F0F",}}/> : "Cadastrar"}
@@ -196,5 +201,6 @@ export function SignUp() {
         </Link>
       </div>
     </PublicTemplate>
+              </>
   );
 }

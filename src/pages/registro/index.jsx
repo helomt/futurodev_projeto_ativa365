@@ -24,6 +24,7 @@ import {
 } from "../../services/serverLocais";
 import { useEffect } from "react";
 import { getLocalUserName } from "../../services/localUser";
+import { Helmet } from "react-helmet";
 
 const schema = z.object({
   nome: z.string().min(3, "O nome do local deve conter no mínimo 3 caracteres"),
@@ -115,7 +116,11 @@ export function Registro() {
     }
   }
 
-  return (
+  return (<>
+  <Helmet>
+    <title>Registro de Local</title>
+    <meta name="description" content="Página de cadastro de Locais"/>
+  </Helmet>
     <div>
       <div>
         <Typography fontSize={40} fontWeight={500} fontStyle={"oblique"}>
@@ -270,5 +275,6 @@ export function Registro() {
         </Button>
       </form>
     </div>
+    </>
   );
 }

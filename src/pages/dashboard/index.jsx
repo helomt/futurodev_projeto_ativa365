@@ -6,6 +6,7 @@ import ListDash from "../../components/listDash";
 import { useEffect, useState } from "react";
 import { contarLocais } from "../../services/serverLocais";
 import { contarUsuarios } from "../../services/serverUsers";
+import { Helmet } from "react-helmet";
 
 export function Dashboard() {
   const [users, setUsers] = useState(0);
@@ -22,6 +23,11 @@ export function Dashboard() {
   }, [users, locais]);
 
   return (
+    <>
+    <Helmet>
+      <title>Dashboard</title>
+      <meta name="description" content="Dashboard com totais cadastrados e listagem de locais"/>
+    </Helmet>
     <div className={styles.mainContainer}>
       <div className={styles.cardContainerLine}>
         <div className={styles.containerText}>
@@ -115,5 +121,6 @@ export function Dashboard() {
         <ListDash></ListDash>
       </div>
     </div>
+              </>
   );
 }
