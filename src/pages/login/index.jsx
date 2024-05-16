@@ -6,20 +6,18 @@ import styles from "./style.module.css";
 import { PublicTemplate } from "../../template/public";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { validacaoEntradaUsuario } from "../../services/serverUsers";
+import { useAuth } from "../../context/auth-context";
 
 export function Login() {
 const navigate =useNavigate();
-// const {signIn} =useAuth()
+const {signIn} =useAuth()
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
 
 async function onSubmit(){
-  // const ok = await signIn()
-  const ok =await validacaoEntradaUsuario(email, password);
-  console.log(ok);
-  if (ok[0]){
+  const ok =await signIn(email, password);
+  if (ok){
     navigate("/dashboard")
   } else{
     alert("Email e/ou senha inválido!")
@@ -39,7 +37,7 @@ async function onSubmit(){
           <form className={styles.form}>
             <TextField
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(String(e.target.value))}
               type="email"
               label="Email"
               variant="outlined"
@@ -47,7 +45,7 @@ async function onSubmit(){
             />
             <TextField
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(String(e.target.value))}
               type="password"
               label="Senha"
               variant="outlined"
