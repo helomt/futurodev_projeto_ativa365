@@ -1,4 +1,4 @@
-![Logo](src\assets\images\logo.png)
+<img src="src\assets\images\logo.png" alt="Logo"/>
 
 <h1 align="center">Ativa 365</h1>
 <p align="center"> <strong> Projeto avaliativo referente ao Módulo 1 - FuturoDev Tubarão V2 </p>
@@ -70,14 +70,6 @@ Entre no diretório do projeto
   cd futurodev_projeto_ativa365
 ```
 
-Inicie o servidor
-
-```bash
-  npm run server
-```
-
-O servidor inciará na porta:300 - acesse http://localhost:3000
-
 ### 🧭Rodando a aplicação web
 
 ```bash
@@ -87,6 +79,15 @@ O servidor inciará na porta:300 - acesse http://localhost:3000
 ```
 
 Esse comando irá ler o arquivo `package.json` e instalar todas as dependências necessárias para o projeto.
+
+Inicie o servidor
+
+```bash
+  npm run server
+```
+
+O servidor inciará na porta:300 - acesse http://localhost:3000
+
 
 Execute a aplicação em modo de desenvolvimento
 
