@@ -38,7 +38,7 @@ Insira um gif ou um link de alguma demonstração
 
 #### Documentação de cores
 
-![Paleta](src\assets\images\paleta.png)
+<img src="src\assets\images\paleta.png" alt="Paleta"/>
 
 A paleta de cores utilizada no projeto foi gerada no site Coolors https://coolors.co/ e testada e todas as questões de contraste e acessibilidade
 
