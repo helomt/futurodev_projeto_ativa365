@@ -19,6 +19,7 @@
 **Ativa 365** - é uma plataforma que facilita o gerenciamento de exercícios e locais para atividades físicas serem praticadas. Os usuários podem cadastrar novos locais de exercícios, encontrar pontos próximos em um mapa interativo (ou lista), visualizar informações sobre os os exercícios em cada ponto e registrar suas próprias contribuições para o sistema.
 
 ## Funcionalidades
+<img src="src\assets\video\express.gif" alt="Funcionalidades do app">
 
 - Cadastro de novo usuário
 - Cadastro de novo local de exercício
@@ -30,7 +31,11 @@
 
 ## 🎨Layout
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img src="src\assets\images\screenshots\login.png" alt="Login"/>
+<img src="src\assets\images\screenshots\cadastro.png" alt="Cadastro"/>
+<img src="src\assets\images\screenshots\dashboard.png" alt="Dashboard"/>
+<img src="src\assets\images\screenshots\locais.png" alt="Locais"/>
+<img src="src\assets\images\screenshots\registro.png" alt="Registro"/>
 
 #### Demonstração
 
@@ -125,8 +130,8 @@ Melhorias que ainda podem ser aplicadas:
 
 - Melhorar a responsividade
 - Adicionar a funcionalidade de mapas
-- Página edição de cadastro
-- Função de exclusão do app
+- Página edição de cadastro do próprio usuário
+- Função de exclusão do próprio usuário no app
 - Função de recuperar senha
 - Função de buscar cep
 - Dark e Light mode

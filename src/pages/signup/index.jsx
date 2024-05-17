@@ -15,7 +15,7 @@ import {
 } from "../../services/serverUsers";
 
 const schema = z.object({
-  nome: z.string().min(4, "Você deve registrar um nome com 4 letras"),
+  nome: z.string().min(3, "Você deve registrar um nome com 3 letras"),
   data: z.string(),
   cpf: z.string().regex(/[0-9]{11}/, "CPF deve conter 11 números"),
   email: z.string().email("Endereço de email inválido"),
@@ -59,7 +59,7 @@ export function SignUp() {
       const cpfInvalido = await validacaoCpf(values.cpf);
       const emailInvalido = await validacaoEmail(values.email);
       if (cpfInvalido || emailInvalido) {
-        alert("Usuário já cadastrado\n Favor verificar login e/ou CPF");
+        alert("Usuário já cadastrado\n Favor verificar email e/ou CPF");
       } else {
         await criarUsuario(values);
         alert("Usuário cadastrado com sucesso");
