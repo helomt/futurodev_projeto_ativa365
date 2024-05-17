@@ -1,6 +1,8 @@
+const url = import.meta.env.VITE_URL_SERVER
+
 // GET
 export async function buscarLocais() {
-  const resposta = await fetch("http://localhost:3000/locais");
+  const resposta = await fetch(url+"/locais");
   const data = await resposta.json();
   if (data.erro) {
     throw new alert("Locais não encontrado");
@@ -10,7 +12,7 @@ export async function buscarLocais() {
 
 //GET 1
 export async function buscarUmLocal(id) {
-  const resposta = await fetch(`http://localhost:3000/locais/${id}`, {
+  const resposta = await fetch(url+`/locais/${id}`, {
     method: "GET",
   });
   const data = await resposta.json();
@@ -22,7 +24,7 @@ export async function buscarUmLocal(id) {
 
 // DELETE
 export async function deletarLocal(id) {
-  const response = await fetch(`http://localhost:3000/locais/${id}`, {
+  const response = await fetch(url+`/locais/${id}`, {
     method: "DELETE",
   });
   const data = await response.json();
@@ -47,7 +49,7 @@ export async function criarLocal(values, username) {
     numero: values.numero,
     username: username,
   };
-  const response = await fetch("http://localhost:3000/locais", {
+  const response = await fetch(url+"/locais", {
     method: "POST",
     body: JSON.stringify(local),
   });
@@ -72,7 +74,7 @@ export async function atualizarLocal(id, values, username) {
     numero: values.numero,
     username: username,
   };
-  const response = await fetch(`http://localhost:3000/locais/${id}`, {
+  const response = await fetch(url+`/locais/${id}`, {
     method: "PUT",
     body: JSON.stringify(local),
   });

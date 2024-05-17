@@ -1,6 +1,8 @@
+const url = import.meta.env.VITE_URL_SERVER
+
 //GET
 export async function buscarUsuarios() {
-  const resposta = await fetch("http://localhost:3000/users");
+  const resposta = await fetch(url+"/users");
   const data = await resposta.json();
   if (data.erro) {
     throw new alert("Usuários não encontrado");
@@ -10,7 +12,7 @@ export async function buscarUsuarios() {
 
 //GET 1
 export async function buscarUmUsuarioId(id) {
-  const resposta = await fetch(`http://localhost:3000/users/${id}`, {
+  const resposta = await fetch(url+`/users/${id}`, {
     method: "GET",
   });
   const data = await resposta.json();
@@ -21,7 +23,7 @@ export async function buscarUmUsuarioId(id) {
 }
 
 export async function buscarUmUsuarioEmail(email) {
-  const resposta = await fetch(`http://localhost:3000/users/?email=${email}`, {
+  const resposta = await fetch(url+`/users/?email=${email}`, {
     method: "GET",
   });
   const data = await resposta.json();
@@ -33,7 +35,7 @@ export async function buscarUmUsuarioEmail(email) {
 
 // DELETE
 export async function deletarUsuario(id) {
-  const response = await fetch(`http://localhost:3000/users/${id}`, {
+  const response = await fetch(url+`/users/${id}`, {
     method: "DELETE",
   });
   const data = await response.json();
@@ -58,7 +60,7 @@ export async function criarUsuario(values) {
     numero: values.numero,
     senha: values.senha,
   };
-  const response = await fetch("http://localhost:3000/users", {
+  const response = await fetch(url+"/users", {
     method: "POST",
     body: JSON.stringify(usuario),
   });
@@ -83,7 +85,7 @@ export async function atualizarUsuario(id, values) {
     numero: values.numero,
     senha: values.senha,
   };
-  const response = await fetch(`http://localhost:3000/users/${id}`, {
+  const response = await fetch(url+`/users/${id}`, {
     method: "PUT",
     body: JSON.stringify(usuario),
   });
@@ -113,7 +115,7 @@ export async function buscarUltimoUsuario() {
 
 export async function validacaoEntradaUsuario(email, senha) {
   const response = await fetch(
-    `http://localhost:3000/users/?email=${email}&senha=${senha}`,
+    url+`/users/?email=${email}&senha=${senha}`,
     {
       method: "GET",
     }
